@@ -1,0 +1,8 @@
+prefix=/home/siddharth/hybrid_control/install
+
+Name: mpc_tracker
+Description: Description of mpc_tracker
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/siddharth/hybrid_control/install/lib 
+Requires: 

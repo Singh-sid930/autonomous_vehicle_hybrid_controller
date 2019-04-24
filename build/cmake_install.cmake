@@ -117,6 +117,8 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/siddharth/hybrid_control/build/gtest/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/mpc_tracker/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/rrt_star/cmake_install.cmake")
 
 endif()
 
