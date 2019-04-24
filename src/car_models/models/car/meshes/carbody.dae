@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>baidu</author>
+      <authoring_tool>OpenCOLLADA2016;  Version: 1.6;  Revision: 21</authoring_tool>
+      <comments>
+			ColladaMaya export options: 
+			bakeTransforms=0;relativePaths=0;preserveSourceTree=0;copyTextures=0;exportTriangles=1;exportCgfxFileReferences=0;
+			isSampling=0;curveConstrainSampling=0;removeStaticCurves=1;exportPhysics=0;exportConvexMeshGeometries=1;exportPolygonMeshes=1;exportLights=1;
+			exportCameras=1;exportJoints=1;exportSkin=1;exportAnimations=1;exportOptimizedBezierAnimation=0;exportInvisibleNodes=1;exportDefaultCameras=0;
+			exportTexCoords=0;exportNormals=0;exportNormalsPerVertex=1;exportVertexColors=0;exportVertexColorsPerVertex=1;
+			exportTexTangents=0;exportTangents=0;exportReferencedMaterials=1;exportMaterialsOnly=0;
+			exportXRefs=0;dereferenceXRefs=1;exportCameraAsLookat=0;cameraXFov=0;cameraYFov=1;doublePrecision=0
+		</comments>
+      <source_data>file:///Users/baidu/vhost_share/car_model/models/car/meshes/carbody.mb</source_data>
+    </contributor>
+    <created>2016-07-05T13:24:22</created>
+    <modified>2016-07-05T13:24:22</modified>
+    <unit name="centimeter" meter="0.01"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_materials>
+    <material id="blinn1" name="blinn1">
+      <instance_effect url="#blinn1-fx"/>
+    </material>
+    <material id="blinn2" name="blinn2">
+      <instance_effect url="#blinn2-fx"/>
+    </material>
+    <material id="blinn3" name="blinn3">
+      <instance_effect url="#blinn3-fx"/>
+    </material>
+    <material id="blinn4" name="blinn4">
+      <instance_effect url="#blinn4-fx"/>
+    </material>
+    <material id="lambert2" name="lambert2">
+      <instance_effect url="#lambert2-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="blinn1-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8 0.8 0.8 1</color>
+            </diffuse>
+            <specular>
+              <color>0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float>0.3</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>0.5</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">blinn1</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="blinn2-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8 0.8 0.8 1</color>
+            </diffuse>
+            <specular>
+              <color>0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float>0.3</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>0.5</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">blinn2</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="blinn3-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8 0.8 0.8 1</color>
+            </diffuse>
+            <specular>
+              <color>0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float>0.3</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>0.5</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">blinn3</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="blinn4-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.006 0.1936 0.3068 1</color>
+            </diffuse>
+            <specular>
+              <color>0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float>0.3</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>0.5</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">blinn4</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="lambert2-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.8 0.8 0 1</color>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId" type="string">lambert2</originalMayaNodeId>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="pCube5Shape" name="pCube5Shape">
+      <mesh>
+        <source id="pCube5Shape-positions" name="pCube5Shape-positions">
+          <float_array id="pCube5Shape-positions-array" count="180">-2.5 -1 1 2.5 -1 1 2.5 1 1 -2.5 1 1 -2.5 -1 0 -2.5 1 0 -2.05 -1 0 -2.023081 -1 0.1699594 -1.944959 -1 0.3232819 -1.823282 -1 0.4449594 -1.669959 -1 0.5230812 -1.5 -1 0.5500001 -1.330041 -1 0.5230811 -1.176718 -1 0.4449594 -1.055041 -1 0.3232819 -0.9769189 -1 0.1699594 -0.95 -1 0 0.9499999 -1 0 0.9769188 -1 0.1699594 1.055041 -1 0.3232819 1.176718 -1 0.4449594 1.330041 -1 0.5230812 1.5 -1 0.5500001 1.669959 -1 0.5230811 1.823282 -1 0.4449594 1.944959 -1 0.3232819 2.023081 -1 0.1699594 2.05 -1 0 2.5 -1 0 2.5 1 0 2.05 1 0 2.023081 1 0.1699594 1.944959 1 0.3232819 1.823282 1 0.4449594 1.669959 1 0.5230811 1.5 1 0.5500001 1.330041 1 0.5230812 1.176718 1 0.4449594 1.055041 1 0.3232819 0.9769188 1 0.1699594 0.9499999 1 0 -0.95 1 0 -0.9769189 1 0.1699594 -1.055041 1 0.3232819 -1.176718 1 0.4449594 -1.330041 1 0.5230811 -1.5 1 0.5500001 -1.669959 1 0.5230812 -1.823282 1 0.4449594 -1.944959 1 0.3232819 -2.023081 1 0.1699594 -2.05 1 0 -1.025066 -1 1.5 0.9854882 -1 1.5 0.9854882 1 1.5 -1.025066 1 1.5 -1.5 -1 1 -1.5 1 1 1.5 -1 1 1.5 1 1</float_array>
+          <technique_common>
+            <accessor source="#pCube5Shape-positions-array" count="60" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pCube5Shape-vertices" name="pCube5Shape-vertices">
+          <input semantic="POSITION" source="#pCube5Shape-positions"/>
+        </vertices>
+        <triangles material="blinn1SG" count="60">
+          <input semantic="VERTEX" source="#pCube5Shape-vertices" offset="0"/>
+          <p>0 1 3 3 1 2 4 0 5 5 0 3 1 28 2 2 28 29 5 51 4 4 51 6 6 51 7 7 51 50 7 50 8 8 50 49 8 49 9 9 49 48 9 48 10 10 48 47 10 47 11 11 47 46 11 46 12 12 46 45 12 45 13 13 45 44 13 44 14 14 44 43 14 43 15 15 43 42 15 42 16 16 42 41 41 40 16 16 40 17 30 29 27 27 29 28 17 40 18 18 40 39 18 39 19 19 39 38 19 38 20 20 38 37 20 37 21 21 37 36 21 36 22 22 36 35 22 35 23 23 35 34 23 34 24 24 34 33 24 33 25 25 33 32 25 32 26 26 32 31 26 31 27 27 31 30 52 53 55 55 53 54 58 53 56 56 53 52 55 54 57 57 54 59 57 59 56 56 59 58</p>
+        </triangles>
+        <triangles material="blinn2SG" count="24">
+          <input semantic="VERTEX" source="#pCube5Shape-vertices" offset="0"/>
+          <p>29 30 2 30 31 2 31 32 2 32 33 2 5 3 51 51 3 50 50 3 49 49 3 48 40 41 39 41 42 39 33 34 2 48 3 47 39 42 38 42 43 38 38 43 37 43 44 37 34 35 2 2 35 3 35 36 3 36 37 3 47 3 46 3 37 46 46 37 45 37 44 45</p>
+        </triangles>
+        <triangles material="blinn3SG" count="24">
+          <input semantic="VERTEX" source="#pCube5Shape-vertices" offset="0"/>
+          <p>4 6 0 6 7 0 7 8 0 8 9 0 28 1 27 27 1 26 26 1 25 25 1 24 16 17 15 17 18 15 9 10 0 24 1 23 15 18 14 18 19 14 14 19 13 19 20 13 10 11 0 0 11 1 11 12 1 12 13 1 23 1 22 1 13 22 22 13 21 13 20 21</p>
+        </triangles>
+        <triangles material="blinn4SG" count="2">
+          <input semantic="VERTEX" source="#pCube5Shape-vertices" offset="0"/>
+          <p>56 52 57 57 52 55</p>
+        </triangles>
+        <triangles material="lambert2SG" count="2">
+          <input semantic="VERTEX" source="#pCube5Shape-vertices" offset="0"/>
+          <p>53 58 54 54 58 59</p>
+        </triangles>
+      </mesh>
+      <extra>
+        <technique profile="OpenCOLLADAMaya">
+          <originalMayaNodeId sid="originalMayaNodeId">pCube5Shape</originalMayaNodeId>
+          <double_sided sid="double_sided">1</double_sided>
+        </technique>
+      </extra>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="carbody">
+      <node id="_pCube5" name="pCube5" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <translate sid="rotatePivot">0 0 0.75</translate>
+        <rotate sid="rotateZ">0 0 1 0</rotate>
+        <rotate sid="rotateY">0 1 0 0</rotate>
+        <rotate sid="rotateX">1 0 0 0</rotate>
+        <translate sid="rotatePivotInverse">0 0 -0.75</translate>
+        <translate sid="scalePivot">0 0 0.75</translate>
+        <scale sid="scale">1 1 1</scale>
+        <translate sid="scalePivotInverse">0 0 -0.75</translate>
+        <instance_geometry url="#pCube5Shape">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="blinn1SG" target="#blinn1"/>
+              <instance_material symbol="blinn2SG" target="#blinn2"/>
+              <instance_material symbol="blinn3SG" target="#blinn3"/>
+              <instance_material symbol="blinn4SG" target="#blinn4"/>
+              <instance_material symbol="lambert2SG" target="#lambert2"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="OpenCOLLADAMaya">
+            <originalMayaNodeId sid="originalMayaNodeId" type="string">pCube5</originalMayaNodeId>
+          </technique>
+        </extra>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>
