@@ -5,6 +5,7 @@ rrt_star/CMakeFiles/rrt_node.dir/src/RRT_star.cpp.o
  /home/siddharth/hybrid_control/src/rrt_star/src/RRT_star.cpp
  /home/siddharth/hybrid_control/src/rrt_star/src/RRT_star_p.h
  /home/siddharth/hybrid_control/src/rrt_star/src/node.h
+ /opt/ros/kinetic/include/geometry_msgs/Point.h
  /opt/ros/kinetic/include/ros/advertise_options.h
  /opt/ros/kinetic/include/ros/advertise_service_options.h
  /opt/ros/kinetic/include/ros/assert.h
@@ -23,6 +24,7 @@ rrt_star/CMakeFiles/rrt_node.dir/src/RRT_star.cpp.o
  /opt/ros/kinetic/include/ros/message.h
  /opt/ros/kinetic/include/ros/message_event.h
  /opt/ros/kinetic/include/ros/message_forward.h
+ /opt/ros/kinetic/include/ros/message_operations.h
  /opt/ros/kinetic/include/ros/message_traits.h
  /opt/ros/kinetic/include/ros/names.h
  /opt/ros/kinetic/include/ros/node_handle.h

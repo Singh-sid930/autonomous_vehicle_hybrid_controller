@@ -5,14 +5,15 @@ import scipy.sparse as sps
 import ipopt
 import matplotlib.pyplot as plt
 import rospy
-from race.msg import drive_param
+# from race.msg import drive_param
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import Vector3
+from geometry_msgs.msg import Point
 import math
 from numpy import linalg as la
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
-ts = 0.3
+ts = 1
 x_goal = 0
 y_goal = 0
 w_goal = 0 
@@ -23,10 +24,10 @@ w_curr = 0
 
 pub = rospy.Publisher('velocity_omega',Vector3 , queue_size=5)
 pub2 = rospy.Publisher('vehicle_Goal',Vector3 , queue_size=5)
-pub3 = rospy.Publisher('drive_parameters', drive_param, queue_size=1)
+pub3 = rospy.Publisher('drive_parameters', Point, queue_size=1)
 vel_msg = Vector3()
 goal_msg = Vector3()
-drive_msg = drive_param()
+drive_msg = Point()
 
 
 def callback1(data):
@@ -153,7 +154,13 @@ def main():
 	global y_goal
 	global w_goal
 
-	w_curr1 =  check_omega(w_goal)
+	# w_curr1 =  check_omega(w_goal)
+
+	w_curr1 = 0
+
+	x_goal = 10
+	y_goal = -10
+	w_goal = -1.2
 
 
 
@@ -204,45 +211,58 @@ def main():
 	# print("Solution of the primal variables: x=%s\n" % repr(x))
 	vel = float(x[0])
 	omega = float(x[1])
-	vel_msg.x = vel
-	vel_msg.y = omega
-	vel_msg.z = w_curr1
+	# vel_msg.x = vel
+	# vel_msg.y = omega
+	# vel_msg.z = w_curr1
 
 	#publish the message containing the velocity commands. 
 
-	pub.publish(vel_msg)
+	# pub.publish(vel_msg)
 
-	goal_msg.x = x_goal
-	goal_msg.y = y_goal
-	goal_msg.z = w_goal
+	# goal_msg.x = x_goal
+	# goal_msg.y = y_goal
+	# goal_msg.z = w_goal
 
-	pub2.publish(goal_msg)
+	# pub2.publish(goal_msg)
 
 	if vel <0.5:
 		vel = 0.5
 
-	drive_msg.velocity = vel
-	drive_msg.angle = omega * 1.5
+	drive_msg.x = vel
+	drive_msg.y = omega * 1.2
 	pub3.publish(drive_msg)
+
+
+	print(x_goal)
+	print(y_goal)
+	print(w_goal)
+
+
+	print(x)
+	print(vel)
+	print(omega)
 
 
 	#For plotting Purposes
 
-	# x_coord = np.zeros(6)
-	# y_coord = np.zeros(6)
-	# xdist=0
-	# ydist=0
+	x_coord = np.zeros(6)
+	y_coord = np.zeros(6)
+	xdist=0
+	ydist=0
 
-	# for i in range(len(x)-1):
-	#     x_coord[i] = xdist
-	#     y_coord[i] = ydist
-	#     xdist = xdist + x[0] * np.cos(x[i+1]) *ts
-	#     ydist = ydist + x[0] * np.sin(x[i+1]) *ts
-	# x_coord[5] = xdist + x[0] * np.cos(x[5]) *ts
-	# y_coord[5] = ydist + x[0] * np.sin(x[5]) *ts
+	for i in range(len(x)-1):
+	    x_coord[i] = xdist
+	    y_coord[i] = ydist
+	    xdist = xdist + x[0] * np.cos(x[i+1]) *ts
+	    ydist = ydist + x[0] * np.sin(x[i+1]) *ts
+	x_coord[5] = xdist + x[0] * np.cos(x[5]) *ts
+	y_coord[5] = ydist + x[0] * np.sin(x[5]) *ts
 
-	# plt.plot(y_coord,x_coord)r
-	# plt.show()
+	print(x_coord)
+	print(y_coord)
+
+	plt.plot(y_coord,x_coord)
+	plt.show()
 
 
 
@@ -254,9 +274,9 @@ def main():
 
 if __name__ == '__main__':
 	rospy.init_node('optimizer')
-	rospy.Subscriber('/pf/viz/inferred_pose', PoseStamped, callback1)
-	rospy.Subscriber('/waypoint/next', Vector3, callback2)
+	# rospy.Subscriber('/pf/viz/inferred_pose', PoseStamped, callback1)
+	rospy.Subscriber('/get_goal', Point, callback2)
 	r = rospy.Rate(40)
-	while not rospy.is_shutdown():
-		main()
-		r.sleep()
+	# while not rospy.is_shutdown():
+	main()
+	r.sleep()

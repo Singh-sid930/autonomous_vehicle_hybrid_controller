@@ -27,7 +27,7 @@ class RRT
 
 	public:
 
-		void create_grid(struct node start,struct node goal, struct obst obstacle);
+		vector<float> create_grid(struct node start,struct node goal, struct obst obstacle);
 		void animate_grid();
 
 

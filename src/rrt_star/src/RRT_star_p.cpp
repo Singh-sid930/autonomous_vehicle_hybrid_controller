@@ -110,7 +110,7 @@ bool RRT::collision_free(struct node p1, struct node p2)
 
 node RRT:: Nearest_node(struct node node_new, int count)
 {
-	 cout<<"in the nearest node function\n";
+	 // cout<<"in the nearest node function\n";
 
 
 	int min_dist 	=	10000;
@@ -209,7 +209,7 @@ void RRT::fill_obstacles(struct obst obstacle){
 
 //******************************************* Public function or generating the grid and finding the path ***********************///
 
-void RRT::create_grid(struct node start,struct node goal, struct obst obstacle)
+vector<float> RRT::create_grid(struct node start,struct node goal, struct obst obstacle)
 
 {
 	 // cout<<"going in grid function"<<"\n";
@@ -245,7 +245,7 @@ void RRT::create_grid(struct node start,struct node goal, struct obst obstacle)
 	if(!In_free_space(start)){
 
 		ROS_INFO("Houston, We have a problem. ");
-		return;
+		return vector<float>{0,0};
 	}
 
 
@@ -304,16 +304,34 @@ void RRT::create_grid(struct node start,struct node goal, struct obst obstacle)
 
 	 int i = count;
 
+	 vector<int> x_list;
+	 vector<int> y_list;
+
 	 while (i != -1){
 
-	 	cout<<"x="<<node_list[i].x<<" , ";
-	 	cout<<"y="<<node_list[i].y<<" , ";
-	 	cout<<"cost="<<  node_list[i].cost<<" , ";
-	 	cout<<"parent node="<<node_list[i].parent_node<<"\n";
+	 	// cout<<"x="<<node_list[i].x<<" , ";
+	 	// cout<<"y="<<node_list[i].y<<" , ";
+	 	// cout<<"cost="<<  node_list[i].cost<<" , ";
+	 	// cout<<"parent node="<<node_list[i].parent_node<<"\n";
+
+	 	x_list.push_back(node_list[i].x);
+	 	y_list.push_back(node_list[i].y);
 	 	
 	 	i = node_list[i].parent_node; 	
 
 	 }
+
+	 int len = x_list.size();
+	 int mid = round(len/2);
+
+	 vector<float> coordinate;
+	 coordinate.push_back(x_list[mid]);
+	 coordinate.push_back(y_list[mid]);
+
+	 return coordinate;
+
+
+
 
 
 	
