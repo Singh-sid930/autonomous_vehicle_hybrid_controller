@@ -9,6 +9,7 @@ import rospy
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import Vector3
 from geometry_msgs.msg import Point
+from geometry_msgs.msg import Twist
 import math
 from numpy import linalg as la
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
@@ -24,7 +25,7 @@ w_curr = 0
 
 pub = rospy.Publisher('velocity_omega',Vector3 , queue_size=5)
 pub2 = rospy.Publisher('vehicle_Goal',Vector3 , queue_size=5)
-pub3 = rospy.Publisher('drive_parameters', Point, queue_size=1)
+pub3 = rospy.Publisher('/catvehicle/cmd_vel', Point, queue_size=1)
 vel_msg = Vector3()
 goal_msg = Vector3()
 drive_msg = Point()
@@ -228,8 +229,13 @@ def main():
 	if vel <0.5:
 		vel = 0.5
 
-	drive_msg.x = vel
-	drive_msg.y = omega * 1.2
+	drive_msg.linear.x 	= vel
+	drive_msg.linear.y 	= 0
+	drive_msg.linear.z 	= 0
+	drive_msg.angular.z = omega * 1.2
+	drive_msg.angular.y = 0 * 1.2
+	drive_msg.angular.x = 0 * 1.2
+	
 	pub3.publish(drive_msg)
 
 
@@ -251,12 +257,12 @@ def main():
 	ydist=0
 
 	for i in range(len(x)-1):
-	    x_coord[i] = xdist
-	    y_coord[i] = ydist
-	    xdist = xdist + x[0] * np.cos(x[i+1]) *ts
-	    ydist = ydist + x[0] * np.sin(x[i+1]) *ts
-	x_coord[5] = xdist + x[0] * np.cos(x[5]) *ts
-	y_coord[5] = ydist + x[0] * np.sin(x[5]) *ts
+	    x_coord[i] 	= xdist
+	    y_coord[i] 	= ydist
+	    xdist 		= xdist + x[0] * np.cos(x[i+1]) *ts
+	    ydist 		= ydist + x[0] * np.sin(x[i+1]) *ts
+		x_coord[5] 	= xdist + x[0] * np.cos(x[5]) *ts
+		y_coord[5] 	= ydist + x[0] * np.sin(x[5]) *ts
 
 	print(x_coord)
 	print(y_coord)

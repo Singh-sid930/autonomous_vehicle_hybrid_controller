@@ -1,0 +1,8 @@
+prefix=/home/siddharth/hybrid_control/devel
+
+Name: velodyne_laserscan
+Description: Description of velodyne_laserscan
+Version: 1.5.2
+Cflags: -I/home/siddharth/hybrid_control/devel/include
+Libs: -L/home/siddharth/hybrid_control/devel/lib 
+Requires: sensor_msgs

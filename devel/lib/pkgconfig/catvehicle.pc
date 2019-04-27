@@ -1,0 +1,8 @@
+prefix=/home/siddharth/hybrid_control/devel
+
+Name: catvehicle
+Description: Description of catvehicle
+Version: 2.0.2
+Cflags: -I/home/siddharth/hybrid_control/src/catvehicle/include
+Libs: -L/home/siddharth/hybrid_control/devel/lib -lcatvehicle
+Requires: geometry_msgs roscpp rospy sensor_msgs std_msgs velodyne_pointcloud tf

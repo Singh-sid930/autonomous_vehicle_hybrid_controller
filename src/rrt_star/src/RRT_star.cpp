@@ -41,16 +41,16 @@ int main(int argc, char **argv)
 
    ros::init(argc, argv, "rrt_goal_node");
 
-  ros::NodeHandle ns;
+  ros::NodeHandle n;
   // ros::NodeHandle ns1;
-  ros::NodeHandle np;
+  // ros::NodeHandle np;
 
   //Create a subscriber object and subscribe to any topic to be subscribed and send the data subscribed to the Callback function
-  ros::Subscriber sub = ns.subscribe("obstacle_coordinate", 10, Callback);
-  ros::Subscriber sub1 = ns.subscribe("goal_coordinate", 10, Callback1);
+  ros::Subscriber sub = n.subscribe("obstaclevehicle_position", 10, Callback);
+  ros::Subscriber sub1 = n.subscribe("goal_position", 10, Callback1);
 
   //Create a publisher object and publish to any publlished topic 
-  ros::Publisher pub = np.advertise<geometry_msgs::Point>("get_goal", 1000);
+  ros::Publisher pub = n.advertise<geometry_msgs::Point>("get_goal", 1000);
 
   // Publish at 5Hz
   ros::Rate loop_rate(5);
@@ -73,16 +73,16 @@ int main(int argc, char **argv)
 	vector<float> coordinates;
 
 
-	cout<<"enter x coordinate of goal";
-	int x_goal;
-	cin>>x_goal;
-	node_g.x = x_goal;
+	// cout<<"enter x coordinate of goal";
+	// int x_goal;
+	// cin>>x_goal;
+	node_g.x = goal_x;
 
 
-	cout<<"enter y coordinate of goal";
-	int y_goal;
-	cin>>y_goal;
-	node_g.y = y_goal;
+	// cout<<"enter y coordinate of goal";
+	// int y_goal;
+	// cin>>y_goal;
+	node_g.y = goal_y;
 
 	cout<<"enter x coordinate of start";
 	int x_start;

@@ -117,8 +117,17 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/siddharth/hybrid_control/build/gtest/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/sicktoolbox/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/velodyne/velodyne/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/velodyne/velodyne_msgs/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/center_line/cmake_install.cmake")
   include("/home/siddharth/hybrid_control/build/mpc_tracker/cmake_install.cmake")
   include("/home/siddharth/hybrid_control/build/rrt_star/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/sicktoolbox_wrapper/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/velodyne/velodyne_driver/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/velodyne/velodyne_laserscan/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/velodyne/velodyne_pointcloud/cmake_install.cmake")
+  include("/home/siddharth/hybrid_control/build/catvehicle/cmake_install.cmake")
 
 endif()
 

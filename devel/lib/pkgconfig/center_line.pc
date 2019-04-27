@@ -1,0 +1,8 @@
+prefix=/home/siddharth/hybrid_control/devel
+
+Name: center_line
+Description: Description of center_line
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/siddharth/hybrid_control/devel/lib 
+Requires: 
