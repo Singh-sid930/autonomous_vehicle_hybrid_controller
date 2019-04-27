@@ -229,7 +229,7 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 	
 
 	if(!In_free_space(goal)){
-		goal.y = goal.y-obstacle.rad-1;
+		goal.x = goal.x-obstacle.rad-1;
 	}
 
 

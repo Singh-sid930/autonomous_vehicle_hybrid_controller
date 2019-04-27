@@ -25,10 +25,10 @@ w_curr = 0
 
 pub = rospy.Publisher('velocity_omega',Vector3 , queue_size=5)
 pub2 = rospy.Publisher('vehicle_Goal',Vector3 , queue_size=5)
-pub3 = rospy.Publisher('/catvehicle/cmd_vel', Point, queue_size=1)
+pub3 = rospy.Publisher('/catvehicle/cmd_vel', Twist, queue_size=1)
 vel_msg = Vector3()
 goal_msg = Vector3()
-drive_msg = Point()
+drive_msg = Twist()
 
 
 def callback1(data):
@@ -155,13 +155,20 @@ def main():
 	global y_goal
 	global w_goal
 
+	goal_x = y_goal
+
+	y_goal = x_goal
+	x_goal = goal_x
+
+	y_goal = y_goal-10
+
 	# w_curr1 =  check_omega(w_goal)
 
 	w_curr1 = 0
 
-	x_goal = 10
-	y_goal = -10
-	w_goal = -1.2
+	# x_goal = 10
+	# y_goal = -10
+	# w_goal = -1.2
 
 
 
@@ -235,40 +242,40 @@ def main():
 	drive_msg.angular.z = omega * 1.2
 	drive_msg.angular.y = 0 * 1.2
 	drive_msg.angular.x = 0 * 1.2
-	
+
 	pub3.publish(drive_msg)
 
 
-	print(x_goal)
-	print(y_goal)
-	print(w_goal)
+	# print(x_goal)
+	# print(y_goal)
+	# print(w_goal)
 
 
-	print(x)
-	print(vel)
-	print(omega)
+	# print(x)
+	# print(vel)
+	# print(omega)
 
 
 	#For plotting Purposes
 
-	x_coord = np.zeros(6)
-	y_coord = np.zeros(6)
-	xdist=0
-	ydist=0
+	# x_coord = np.zeros(6)
+	# y_coord = np.zeros(6)
+	# xdist=0
+	# ydist=0
 
-	for i in range(len(x)-1):
-	    x_coord[i] 	= xdist
-	    y_coord[i] 	= ydist
-	    xdist 		= xdist + x[0] * np.cos(x[i+1]) *ts
-	    ydist 		= ydist + x[0] * np.sin(x[i+1]) *ts
-		x_coord[5] 	= xdist + x[0] * np.cos(x[5]) *ts
-		y_coord[5] 	= ydist + x[0] * np.sin(x[5]) *ts
+	# for i in range(len(x)-1):
+	#     x_coord[i] 	= xdist
+	#     y_coord[i] 	= ydist
+	#     xdist 		= xdist + x[0] * np.cos(x[i+1]) *ts
+	#     ydist 		= ydist + x[0] * np.sin(x[i+1]) *ts
+	# 	x_coord[5] 	= xdist + x[0] * np.cos(x[5]) *ts
+	# 	y_coord[5] 	= ydist + x[0] * np.sin(x[5]) *ts
 
-	print(x_coord)
-	print(y_coord)
+	# print(x_coord)
+	# print(y_coord)
 
-	plt.plot(y_coord,x_coord)
-	plt.show()
+	# plt.plot(y_coord,x_coord)
+	# plt.show()
 
 
 
@@ -283,6 +290,6 @@ if __name__ == '__main__':
 	# rospy.Subscriber('/pf/viz/inferred_pose', PoseStamped, callback1)
 	rospy.Subscriber('/get_goal', Point, callback2)
 	r = rospy.Rate(40)
-	# while not rospy.is_shutdown():
-	main()
-	r.sleep()
+	while not rospy.is_shutdown():
+		main()
+		r.sleep()

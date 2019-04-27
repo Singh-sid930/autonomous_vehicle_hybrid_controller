@@ -17,14 +17,14 @@ float obst_z = 0;
 
 float goal_x = 0;
 float goal_y = 0;
-float goal_z = 0;
+float goal_w = 0;
 
 
 void Callback1(geometry_msgs::Point msg)
 {
    goal_x = msg.x;
    goal_y = msg.y;
-   goal_z = msg.z;
+   goal_w = msg.z;
   
 }
 
@@ -36,6 +36,13 @@ void Callback(geometry_msgs::Point msg)
   
 }
 
+// void transform_position(x_goal,y_goal,w_goal){
+
+
+
+
+// }
+
 int main(int argc, char **argv)
 {
 
@@ -46,18 +53,14 @@ int main(int argc, char **argv)
   // ros::NodeHandle np;
 
   //Create a subscriber object and subscribe to any topic to be subscribed and send the data subscribed to the Callback function
-  ros::Subscriber sub = n.subscribe("obstaclevehicle_position", 10, Callback);
-  ros::Subscriber sub1 = n.subscribe("goal_position", 10, Callback1);
+  ros::Subscriber sub = n.subscribe("/obstaclevehicle_position", 10, Callback);
+  ros::Subscriber sub1 = n.subscribe("/goal_position", 10, Callback1);
 
   //Create a publisher object and publish to any publlished topic 
   ros::Publisher pub = n.advertise<geometry_msgs::Point>("get_goal", 1000);
 
   // Publish at 5Hz
   ros::Rate loop_rate(5);
-
-
-
-
 
 
 	RRT rrt;
@@ -68,49 +71,68 @@ int main(int argc, char **argv)
 
 	obstacle.x_c = 10; 
 	obstacle.y_c = 10; 
-	obstacle.rad = 1;
-
+	obstacle.rad = 1.5;
 	vector<float> coordinates;
 
 
 	// cout<<"enter x coordinate of goal";
 	// int x_goal;
 	// cin>>x_goal;
-	node_g.x = goal_x;
+	
 
 
 	// cout<<"enter y coordinate of goal";
 	// int y_goal;
 	// cin>>y_goal;
-	node_g.y = goal_y;
+	
 
-	cout<<"enter x coordinate of start";
-	int x_start;
-	cin>>x_start;
-	node_s.x = x_start;
+	// cout<<"enter x coordinate of start";
+	// int x_start;
+	// cin>>x_start;
+	node_s.x = 10;
 
-	cout<<"enter y coordinate of start";
-	int y_start;
-	cin>>y_start;
-	node_s.y = y_start;
+	// cout<<"enter y coordinate of start";
+	// int y_start;
+	// cin>>y_start;
+	node_s.y = 0;
 
-	cout<<"getting the function"<<"\n";
+	// cout<<"getting the function"<<"\n";
 
-	coordinates = rrt.create_grid(node_s,node_g, obstacle);
+	// coordinates = rrt.create_grid(node_s,node_g, obstacle);
 
-	float mpc_goal_x = coordinates[0];
-	float mpc_goal_y = coordinates[1];
-	cout<<"x coordinate of goal is = "<<coordinates[0];
-	cout<<"y coordinate of goal is = "<<coordinates[1];
+	// float mpc_goal_x = coordinates[0];
+	// float mpc_goal_y = coordinates[1];
+	// cout<<"x coordinate of goal is = "<<coordinates[0];
+	// cout<<"y coordinate of goal is = "<<coordinates[1];
 
-	cout<<"completed"<<"\n";
+	// cout<<"completed"<<"\n";
+
+	float mpc_goal_x;
+	float mpc_goal_y;
 
 	 while (ros::ok())
   {
     /**
      * This is a message object. You stuff it with data, and then publish it. In my case I have used a geometry message type.
      */
-    geometry_msgs::Point msg;
+
+  	float x_goal = goal_y;
+  	float y_goal = goal_x;
+
+
+  	x_goal = x_goal + 10;
+
+
+  	node_g.x = x_goal;
+  	node_g.y = y_goal;
+
+  	coordinates = rrt.create_grid(node_s,node_g, obstacle);
+
+	mpc_goal_x = coordinates[0];
+	mpc_goal_y = coordinates[1];
+
+
+    geometry_msgs::Point messagesg;
 
     msg.x = mpc_goal_x; 
     msg.y = mpc_goal_y;
@@ -122,6 +144,8 @@ int main(int argc, char **argv)
      * given as a template parameter to the advertise<>() call, as was done
      * in the constructor above.
      */
+
+
     pub.publish(msg);
 
     ros::spinOnce();
