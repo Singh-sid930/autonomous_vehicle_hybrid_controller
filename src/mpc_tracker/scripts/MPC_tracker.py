@@ -154,6 +154,7 @@ def main():
 	global x_goal
 	global y_goal
 	global w_goal
+	global w_curr
 
 	goal_x = y_goal
 
@@ -164,7 +165,8 @@ def main():
 
 	# w_curr1 =  check_omega(w_goal)
 
-	w_curr1 = 0
+	w_curr1 = w_curr
+	# w_curr1 = 0
 
 	# x_goal = 10
 	# y_goal = -10
@@ -233,8 +235,8 @@ def main():
 
 	# pub2.publish(goal_msg)
 
-	if vel <0.5:
-		vel = 0.5
+	if vel <1.5:
+		vel = 1.5
 
 	drive_msg.linear.x 	= vel
 	drive_msg.linear.y 	= 0
@@ -287,7 +289,7 @@ def main():
 
 if __name__ == '__main__':
 	rospy.init_node('optimizer')
-	# rospy.Subscriber('/pf/viz/inferred_pose', PoseStamped, callback1)
+	rospy.Subscriber('/egovehicle_position', PoseStamped, callback1)
 	rospy.Subscriber('/get_goal', Point, callback2)
 	r = rospy.Rate(40)
 	while not rospy.is_shutdown():

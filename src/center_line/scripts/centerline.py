@@ -27,6 +27,8 @@ goal_position_inworld = geometry_msgs.msg.Point()
 
 world_initial_position = geometry_msgs.msg.Pose()
 
+obstaclevehicle_position_inbody.x = 18
+obstaclevehicle_position_inbody.y = 0
 
 waypoints = np.array([[0,0],[50,0],[100,0],[150,0]], dtype = np.float64) #straight
 # waypoints = [[],[],[],[]] #curved
@@ -104,7 +106,7 @@ if __name__ == '__main__':
 
 			goal_position_inbody = calculate_goal_position(traj_points, egovehicle_pose_inworld)
 			
-			obstaclevehicle_position_inbody = transform_to_car_frame(obstaclevehicle_pose_inworld.position,egovehicle_pose_inworld)
+			# obstaclevehicle_position_inbody = transform_to_car_frame(obstaclevehicle_pose_inworld.position,egovehicle_pose_inworld)
 
 			# print(goal_position_inbody)
 			# print(obstaclevehicle_position_inbody)

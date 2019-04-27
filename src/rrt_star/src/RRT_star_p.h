@@ -13,6 +13,7 @@ class RRT
 {
 	private:
     	vector<vector<int>> occu_grid = vector<vector<int>> (20, vector<int> (20, 0)); 		
+		// vector<vector<int>> occu_grid;
     	vector<node> node_list = vector<node>(400);	
 		const int MAX_DIST 	= 	2; 
 		const int RANGE 	=	1;

@@ -169,7 +169,7 @@ bool RRT::In_free_space(struct node a){
 	 // cout<<"in the free space function\n";
 
 
-	if (occu_grid[(a.x)][(a.y)]==1)
+	if (occu_grid[(a.y)][(a.x)]==1)
 	{
 		return false;
 
@@ -187,20 +187,60 @@ bool RRT::In_free_space(struct node a){
 
 void RRT::fill_obstacles(struct obst obstacle){
 
+	// vector<vector<int>> occu_grid {20, vector<int>(20,0)};
+
 	float x_c = obstacle.x_c;
 	float y_c = obstacle.y_c;
 	float rad = obstacle.rad;
-	float x_st = x_c - rad;
-	float y_st = y_c - rad;
+	float x_st;
+	float y_st;
 
-	while(x_st<=x_c+rad){
-		while(y_st<=y_c+rad){
-			occu_grid[x_st][y_st] = 1;
-			y_st++;
-		}
-		y_st = y_c - rad;
-		x_st++;
+
+	if(x_c > rad){
+		x_st = x_c - rad;
 	}
+	else{
+		x_st = x_c;
+		// cout<<x_st;
+	}
+
+	
+	
+	if(y_c > rad){
+	 y_st = y_c - rad;	
+	}
+	else{
+		y_st = y_c;
+	}
+	
+
+	cout<<x_st<<"\n";
+	cout<<y_st<<"\n";
+	
+
+	while(y_st<=y_c+rad){
+		if(y_st>19){
+			break;
+		}
+		while(x_st<=x_c+rad ){
+			if(x_st>19){
+				break;
+			}
+			occu_grid[y_st][x_st] = 1;
+			x_st++;
+		}
+		if(x_st>rad){
+			x_st = x_c - rad;
+		}
+		else{
+			x_st = x_c;
+		}
+		
+		y_st++;
+	}
+
+	
+
 
 
 	
@@ -211,11 +251,21 @@ void RRT::fill_obstacles(struct obst obstacle){
 
 vector<float> RRT::create_grid(struct node start,struct node goal, struct obst obstacle)
 
-{
-	 // cout<<"going in grid function"<<"\n";
+{	
 
+	//********************* Reinitialize the grid before every call **************///////////
+	for (auto &v: occu_grid) {
+    std::fill(v.begin(), v.end(), 0);
+	}
+	
 
-	fill_obstacles(obstacle);
+	//******************** Fill the grid with updated obstacles *******************///////////////
+
+	if(obstacle.x_c<20 && obstacle.y_c<20){
+	fill_obstacles(obstacle);	
+	}
+	
+	//************************ Initialize random time and other stuff ******************//
 
 	srand (time(NULL));
 
@@ -226,12 +276,9 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 	
 
 	int count 		= 	0;
-	
 
-	if(!In_free_space(goal)){
-		goal.x = goal.x-obstacle.rad-1;
-	}
 
+	//************************* check the grid *************************************//
 
 	// for(int r = 0; r<occu_grid.size();r++){
 
@@ -241,6 +288,16 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 	// 	}
 	// 	cout<<"\n";
 	// }
+	
+
+	// ******************************** Check if the goal is in free space *******************//
+
+	if(!In_free_space(goal)){
+		goal.x = goal.x-obstacle.rad-obstacle.rad-1;
+	}
+
+
+	//************************************ Check if the start is in the free space **********//
 
 	if(!In_free_space(start)){
 
@@ -250,6 +307,9 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 
 
 	struct node nnew;
+
+
+	/// ******************************** Start the plan *********************************///
 
 
 
@@ -309,10 +369,10 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 
 	 while (i != -1){
 
-	 	// cout<<"x="<<node_list[i].x<<" , ";
-	 	// cout<<"y="<<node_list[i].y<<" , ";
-	 	// cout<<"cost="<<  node_list[i].cost<<" , ";
-	 	// cout<<"parent node="<<node_list[i].parent_node<<"\n";
+	 	cout<<"x="<<node_list[i].x<<" , ";
+	 	cout<<"y="<<node_list[i].y<<" , ";
+	 	cout<<"cost="<<  node_list[i].cost<<" , ";
+	 	cout<<"parent node="<<node_list[i].parent_node<<"\n";
 
 	 	x_list.push_back(node_list[i].x);
 	 	y_list.push_back(node_list[i].y);
@@ -328,13 +388,17 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 	 coordinate.push_back(x_list[mid]);
 	 coordinate.push_back(y_list[mid]);
 
-	 return coordinate;
+	vector<float> obst_free_goal{goal.x,goal.y};
 
+	if(goal.y<obstacle.y_c-obstacle.rad){
+		return obst_free_goal;
+	}
+	else{
 
+		return coordinate;
 
+	}
 
-
-	
 }
 
 void RRT::animate_grid()
