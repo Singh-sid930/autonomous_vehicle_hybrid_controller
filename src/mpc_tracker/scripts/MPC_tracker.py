@@ -6,7 +6,7 @@ import ipopt
 import matplotlib.pyplot as plt
 import rospy
 # from race.msg import drive_param
-from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Vector3
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Twist
@@ -25,7 +25,7 @@ w_curr = 0
 
 pub = rospy.Publisher('velocity_omega',Vector3 , queue_size=5)
 pub2 = rospy.Publisher('vehicle_Goal',Vector3 , queue_size=5)
-pub3 = rospy.Publisher('/catvehicle/cmd_vel', Twist, queue_size=1)
+pub3 = rospy.Publisher('/catvehicle/cmd_vel_safe', Twist, queue_size=1)
 vel_msg = Vector3()
 goal_msg = Vector3()
 drive_msg = Twist()
@@ -38,17 +38,17 @@ def callback1(data):
 	global y_curr
 	global w_curr
 
-	qx=data.pose.orientation.x
-	qy=data.pose.orientation.y
-	qz=data.pose.orientation.z
-	qw=data.pose.orientation.w
+	qx=data.orientation.x
+	qy=data.orientation.y
+	qz=data.orientation.z
+	qw=data.orientation.w
 
 	quaternion = (qx,qy,qz,qw)
 	euler   = euler_from_quaternion(quaternion)
 
 	w_curr     = euler[2] 
-	x_curr = data.pose.position.x
-	y_curr = data.pose.position.y
+	x_curr = data.position.x
+	y_curr = data.position.y
 	
 def callback2(data):
 
@@ -61,6 +61,13 @@ def callback2(data):
 	x_goal = data.x
 	y_goal = data.y
 	w_goal = data.z 
+
+	goal_x = y_goal
+
+	y_goal = x_goal
+	x_goal = goal_x
+
+	y_goal = y_goal-10
 
 def check_omega (w_g):
 	global w_curr
@@ -81,6 +88,8 @@ class hs071(object):
 	global x_goal
 	global y_goal
 	global w_goal
+
+	
 
 
 	def __init__(self):
@@ -156,12 +165,7 @@ def main():
 	global w_goal
 	global w_curr
 
-	goal_x = y_goal
-
-	y_goal = x_goal
-	x_goal = goal_x
-
-	y_goal = y_goal-10
+	
 
 	# w_curr1 =  check_omega(w_goal)
 
@@ -182,8 +186,8 @@ def main():
 
 
 	#define the inequality constraints limit 
-	cl = [-0.418, -0.428,-0.428, -0.428, abs(w_goal - w_curr1),-0.4, 0 , 0 ]
-	cu = [0.428, 0.428,0.428, 0.428,  abs(w_goal - w_curr1) , +0.4, 100 , 100]
+	cl = [-0.418, -0.428,-0.428, -0.428, (w_goal-w_curr1),-0.4, 0 , 0 ]
+	cu = [0.428, 0.428,0.428, 0.428,  (w_goal-w_curr1) , +0.4, 100 , 100]
 
 	#define the non linear optimization problem
 
@@ -220,7 +224,7 @@ def main():
 	
 	# print("Solution of the primal variables: x=%s\n" % repr(x))
 	vel = float(x[0])
-	omega = float(x[1])
+	omega = -float(x[1])
 	# vel_msg.x = vel
 	# vel_msg.y = omega
 	# vel_msg.z = w_curr1
@@ -229,11 +233,11 @@ def main():
 
 	# pub.publish(vel_msg)
 
-	# goal_msg.x = x_goal
-	# goal_msg.y = y_goal
-	# goal_msg.z = w_goal
+	goal_msg.x = x_goal
+	goal_msg.y = y_goal
+	goal_msg.z = w_goal
 
-	# pub2.publish(goal_msg)
+	pub2.publish(goal_msg)
 
 	if vel <1.5:
 		vel = 1.5
@@ -289,7 +293,7 @@ def main():
 
 if __name__ == '__main__':
 	rospy.init_node('optimizer')
-	rospy.Subscriber('/egovehicle_position', PoseStamped, callback1)
+	rospy.Subscriber('/egovehicle_position', Pose, callback1)
 	rospy.Subscriber('/get_goal', Point, callback2)
 	r = rospy.Rate(40)
 	while not rospy.is_shutdown():

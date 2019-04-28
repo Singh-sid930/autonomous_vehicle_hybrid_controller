@@ -216,7 +216,12 @@ void RRT::fill_obstacles(struct obst obstacle){
 
 	cout<<x_st<<"\n";
 	cout<<y_st<<"\n";
-	
+
+	x_st = abs(round(x_st));
+	y_st = abs(round(y_st));
+	cout<<x_st<<"\n";
+	cout<<y_st<<"\n";
+
 
 	while(y_st<=y_c+rad){
 		if(y_st>19){
@@ -261,7 +266,7 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 
 	//******************** Fill the grid with updated obstacles *******************///////////////
 
-	if(obstacle.x_c<20 && obstacle.y_c<20){
+	if(obstacle.x_c<20 && obstacle.y_c<20 && obstacle.x_c>=0){
 	fill_obstacles(obstacle);	
 	}
 	
@@ -382,11 +387,11 @@ vector<float> RRT::create_grid(struct node start,struct node goal, struct obst o
 	 }
 
 	 int len = x_list.size();
-	 int mid = round(len/2);
+	 
 
 	 vector<float> coordinate;
-	 coordinate.push_back(x_list[mid]);
-	 coordinate.push_back(y_list[mid]);
+	 coordinate.push_back(x_list[len-1]);
+	 coordinate.push_back(y_list[len-1]);
 
 	vector<float> obst_free_goal{goal.x,goal.y};
 

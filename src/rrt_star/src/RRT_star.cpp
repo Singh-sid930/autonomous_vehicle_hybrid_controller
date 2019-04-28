@@ -108,14 +108,16 @@ int main(int argc, char **argv)
 
   	// break;
 
-	mpc_goal_x = coordinates[0];
-	mpc_goal_y = coordinates[1];
+	mpc_goal_x = coordinates[1];
+	mpc_goal_y = coordinates[0];
+
+
 
 
     geometry_msgs::Point msg;
 
     msg.x = mpc_goal_x; 
-    msg.y = mpc_goal_y;
+    msg.y = mpc_goal_y-10;
     msg.z = 0.0;
 
     /**

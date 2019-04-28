@@ -34,7 +34,7 @@ This launch file loads the worlds and models for the catvehicle
 	  <arg name="gui" default="true"/>
 	  <arg name="headless" default="false"/>
 	  <arg name="debug" default="false"/>
-      	  <arg name="worldfile" default="sample2.world"/>
+      	  <arg name="worldfile" default="sample3.world"/>
 
       <!-- change these defaults here, or as a cmd line arg, in order to turn off   -->
       <!--   sensors that you aren't using, thus freeing up computational resources -->
