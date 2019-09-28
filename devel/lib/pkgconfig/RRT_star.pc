@@ -1,8 +1,0 @@
-prefix=/home/siddharth/hybrid_control/devel
-
-Name: RRT_star
-Description: Description of RRT_star
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/siddharth/hybrid_control/devel/lib 
-Requires: 

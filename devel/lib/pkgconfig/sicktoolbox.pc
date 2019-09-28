@@ -1,8 +1,0 @@
-prefix=/home/siddharth/hybrid_control/devel
-
-Name: sicktoolbox
-Description: Description of sicktoolbox
-Version: 1.0.103
-Cflags: -I/home/siddharth/hybrid_control/src/sicktoolbox/include
-Libs: -L/home/siddharth/hybrid_control/devel/lib -lSickLD -lSickLMS1xx -lSickLMS2xx
-Requires: 
