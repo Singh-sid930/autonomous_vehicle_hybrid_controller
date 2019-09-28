@@ -14,6 +14,8 @@ I only claim ownership of the following packages:
 
 Regards to people from ASU to build the catvehicle package.  
 
+More details can be found in the Docs/
+
 Please dont beat me up over the code quality. This was built in two days. 
 
 For any issues mail on sidsingh@seas.upenn.edu or Singh.sid930@gmail.com
